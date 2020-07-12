@@ -26,6 +26,9 @@ namespace MVC_EF_Start.Controllers
     public async Task<ViewResult> DatabaseOperations()
     {
       // CREATE operation
+     
+    
+            
       Company MyCompany = new Company();
       MyCompany.symbol = "MCOB";
       MyCompany.name = "ISM";
@@ -34,7 +37,19 @@ namespace MVC_EF_Start.Controllers
       MyCompany.type = "ISM";
       MyCompany.iexId = "ISM";
 
-      Quote MyCompanyQuote1 = new Quote();
+    Course MyCourse = new Course();
+    MyCourse.name = "Shiva";
+
+    Student MyStudent = new Student();
+     MyStudent.name = "Rameez";
+
+    Enrolment MyEnrolment = new Enrolment();
+      MyEnrolment.grade = "22";
+      MyEnrolment.course = MyCourse;
+      MyEnrolment.student = MyStudent; 
+
+
+            Quote MyCompanyQuote1 = new Quote();
       //MyCompanyQuote1.EquityId = 123;
       MyCompanyQuote1.date = "11-23-2018";
       MyCompanyQuote1.open = 46.13F;
@@ -66,11 +81,16 @@ namespace MVC_EF_Start.Controllers
       MyCompanyQuote2.changeOverTime = 0.56F;
       MyCompanyQuote2.symbol = "MCOB";
 
+            /*
       dbContext.Companies.Add(MyCompany);
       dbContext.Quotes.Add(MyCompanyQuote1);
       dbContext.Quotes.Add(MyCompanyQuote2);
+      */
+      dbContext.Students.Add(MyStudent);
+            dbContext.Enrolments.Add(MyEnrolment);
+            dbContext.Courses.Add(MyCourse);
 
-      dbContext.SaveChanges();
+            dbContext.SaveChanges();
       
       // READ operation
       Company CompanyRead1 = dbContext.Companies
@@ -92,7 +112,7 @@ namespace MVC_EF_Start.Controllers
       //dbContext.Companies.Remove(CompanyRead1);
       //await dbContext.SaveChangesAsync();
 
-      return View();
+      return View(MyStudent);
     }
 
     public ViewResult LINQOperations()
@@ -113,7 +133,11 @@ namespace MVC_EF_Start.Controllers
                               .Quotes
                               .FirstOrDefault();
 
-      return View();
+
+     Student StudentQuery = dbContext.Students
+                                   .Where(x => x.Id == 2004)                                  
+                                   .First(10); 
+      return View(StudentQuery);
     }
 
   }

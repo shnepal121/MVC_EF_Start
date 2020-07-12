@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 }
+@model Student; 
 
 <!DOCTYPE html>
 
@@ -8,8 +9,29 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>DatabaseOperations</title>
+    <style>
+
+        h1 {
+            color: blue;
+            font-size: 20px; 
+        }
+
+    </style>
 </head>
 <body>
-  <h2>Database operations successful</h2>
+             <h2>Database operations successful</h2>
+  
+              <div>
+                  <h1>
+                      <table>
+                       <tr>
+                              <th> @Model.name</th>
+                              <th> @Model.Id</th>
+
+                          </tr>
+
+                      </table>
+                  </h1>
+              </div>
 </body>
 </html>
