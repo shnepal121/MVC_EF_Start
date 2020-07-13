@@ -28,7 +28,7 @@ namespace MVC_EF_Start.Controllers
       // CREATE operation
      
     
-            
+     /*     
       Company MyCompany = new Company();
       MyCompany.symbol = "MCOB";
       MyCompany.name = "ISM";
@@ -36,6 +36,9 @@ namespace MVC_EF_Start.Controllers
       MyCompany.isEnabled = true;
       MyCompany.type = "ISM";
       MyCompany.iexId = "ISM";
+    */
+
+
 
     Course MyCourse = new Course();
     MyCourse.name = "Shiva";
@@ -48,8 +51,8 @@ namespace MVC_EF_Start.Controllers
       MyEnrolment.course = MyCourse;
       MyEnrolment.student = MyStudent; 
 
-
-            Quote MyCompanyQuote1 = new Quote();
+    /*
+      Quote MyCompanyQuote1 = new Quote();
       //MyCompanyQuote1.EquityId = 123;
       MyCompanyQuote1.date = "11-23-2018";
       MyCompanyQuote1.open = 46.13F;
@@ -81,18 +84,22 @@ namespace MVC_EF_Start.Controllers
       MyCompanyQuote2.changeOverTime = 0.56F;
       MyCompanyQuote2.symbol = "MCOB";
 
-            /*
+            
       dbContext.Companies.Add(MyCompany);
       dbContext.Quotes.Add(MyCompanyQuote1);
       dbContext.Quotes.Add(MyCompanyQuote2);
-      */
-      dbContext.Students.Add(MyStudent);
-            dbContext.Enrolments.Add(MyEnrolment);
-            dbContext.Courses.Add(MyCourse);
+    */  
 
-            dbContext.SaveChanges();
+
+
+      dbContext.Students.Add(MyStudent);
+      dbContext.Enrolments.Add(MyEnrolment);
+      dbContext.Courses.Add(MyCourse);
+
+      dbContext.SaveChanges();
       
       // READ operation
+      /*
       Company CompanyRead1 = dbContext.Companies
                               .Where(c => c.symbol == "MCOB")
                               .First();
@@ -101,8 +108,10 @@ namespace MVC_EF_Start.Controllers
                               .Include(c => c.Quotes)
                               .Where(c => c.symbol == "MCOB")
                               .First();
-
+        */
+        
       // UPDATE operation
+      /*
       CompanyRead1.iexId = "MCOB";
       dbContext.Companies.Update(CompanyRead1);
       //dbContext.SaveChanges();
@@ -111,33 +120,37 @@ namespace MVC_EF_Start.Controllers
       // DELETE operation
       //dbContext.Companies.Remove(CompanyRead1);
       //await dbContext.SaveChangesAsync();
+      */
+
 
       return View(MyStudent);
     }
 
     public ViewResult LINQOperations()
     {
-      Company CompanyRead1 = dbContext.Companies
-                                      .Where(c => c.symbol == "MCOB")
-                                      .First();
+            /*        
+            Company CompanyRead1 = dbContext.Companies
+                                            .Where(c => c.symbol == "MCOB")
+                                            .First();
 
-      Company CompanyRead2 = dbContext.Companies
-                                      .Include(c => c.Quotes)
-                                      .Where(c => c.symbol == "MCOB")
-                                      .First();
+            Company CompanyRead2 = dbContext.Companies
+                                            .Include(c => c.Quotes)
+                                            .Where(c => c.symbol == "MCOB")
+                                            .First();
 
-      Quote Quote1 = dbContext.Companies
-                              .Include(c => c.Quotes)
-                              .Where(c => c.symbol == "MCOB")
-                              .FirstOrDefault()
-                              .Quotes
-                              .FirstOrDefault();
+            Quote Quote1 = dbContext.Companies
+                                    .Include(c => c.Quotes)
+                                    .Where(c => c.symbol == "MCOB")
+                                    .FirstOrDefault()
+                                    .Quotes
+                                    .FirstOrDefault();
+          */
 
-
-     Student StudentQuery = dbContext.Students
-                                   .Where(x => x.Id == 2004)                                  
-                                   .First(10); 
-      return View(StudentQuery);
+            Student StudentQuery = dbContext.Students
+                                          .Where(x => x.Id > 2004)
+                                          .FirstOrDefault();
+                                   //.ToList();
+            return View(StudentQuery);
     }
 
   }
